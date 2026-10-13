@@ -7,7 +7,7 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-GEMINI_MODEL = "gemini-3.8-flash"
+GEMINI_MODEL = "gemini-3.5-flash-lite"
 DUPLICATE_CONFIDENCE = 0.90
 POSSIBLE_DUPLICATE_CONFIDENCE = 0.70
 
