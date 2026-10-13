@@ -5703,6 +5703,30 @@
         0.051296253
       ],
       "submitted_at": "2026-10-13T07:33:35.980249+00:00"
+    },
+    {
+      "id": 8,
+      "issue_number": 7,
+      "file": "ideas/0008-add-a-header-to-homepage.md",
+      "username": "kampallysharmila9",
+      "title": "add a header to homepage",
+      "category": "User Experience",
+      "problem": "Users dont see global header which causes lot of confusion on how to navigate",
+      "solution": "Add a global header",
+      "benefit": "Hassle free experience for users",
+      "keywords": [
+        "header",
+        "homepage",
+        "dont",
+        "global",
+        "causes",
+        "confusion",
+        "navigate",
+        "hassle",
+        "free",
+        "experience"
+      ],
+      "submitted_at": "2026-10-13T16:49:35.983126+00:00"
     }
   ]
 }
