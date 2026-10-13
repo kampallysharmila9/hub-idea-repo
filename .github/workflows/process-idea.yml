@@ -40,64 +40,15 @@ jobs:
           echo "Python files:"
           find . -type f -name "*.py"
 
-- name: Diagnose Gemini API
+      - name: Process idea
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+
         run: |
-          python3 - <<'PY'
-          import os
-          import json
-          import urllib.request
-          import urllib.error
-
-          key = os.environ.get("GEMINI_API_KEY")
-
-          if not key:
-              print("ERROR: GEMINI_API_KEY secret is missing.")
-              raise SystemExit(1)
-
-          print("API key secret is configured.")
-          print("Testing Gemini 2.5 Flash...")
-
-          url = (
-              "https://generativelanguage.googleapis.com/"
-              "v1beta/models/gemini-2.5-flash:generateContent"
-          )
-
-          payload = {
-              "contents": [{
-                  "parts": [{
-                      "text": "Reply with exactly OK."
-                  }]
-              }]
-          }
-
-          request = urllib.request.Request(
-              url,
-              data=json.dumps(payload).encode("utf-8"),
-              headers={
-                  "Content-Type": "application/json",
-                  "x-goog-api-key": key,
-              },
-              method="POST",
-          )
-
-          try:
-              with urllib.request.urlopen(
-                  request, timeout=45
-              ) as response:
-                  print("HTTP status:", response.status)
-                  print("Response:", response.read().decode()[:1500])
-
-          except urllib.error.HTTPError as error:
-              print("HTTP status:", error.code)
-              print("Response:", error.read().decode()[:1500])
-
-          except Exception as error:
-              print("Connection error:", type(error).__name__)
-              print(str(error)[:500])
-              raise
-          PY
+          python3 scripts/process_idea.py
 
       - name: Commit changes
         run: |
