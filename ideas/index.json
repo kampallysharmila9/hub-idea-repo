@@ -5727,6 +5727,34 @@
         "experience"
       ],
       "submitted_at": "2026-10-13T16:49:35.983126+00:00"
+    },
+    {
+      "id": 9,
+      "issue_number": 9,
+      "file": "ideas/0009-automate-invoice-processing.md",
+      "username": "kampallysharmila9",
+      "title": "Automate invoice processing",
+      "category": "Reporting",
+      "problem": "Manual invoice entry takes too much time",
+      "solution": "Extract invoice information automatically and reduce manual data entry.",
+      "benefit": "Extract invoice information automatically and reduce manual data entry.",
+      "keywords": [
+        "automate",
+        "invoice",
+        "processing",
+        "manual",
+        "entry",
+        "takes",
+        "much",
+        "time",
+        "extract",
+        "information",
+        "automatically",
+        "reduce",
+        "data",
+        "reporting"
+      ],
+      "submitted_at": "2026-10-13T17:19:41.745231+00:00"
     }
   ]
 }
