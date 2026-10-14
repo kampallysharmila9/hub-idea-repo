@@ -55,7 +55,7 @@ def main():
     if not (title.strip() or body.strip()):
         raise RuntimeError("Issue title and body are empty.")
 
-prompt = f"""
+    prompt = f"""
 You are a strict content-policy classifier for ideas submitted
 to a software project.
 
