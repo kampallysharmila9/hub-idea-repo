@@ -5755,6 +5755,24 @@
         "reporting"
       ],
       "submitted_at": "2026-10-13T17:19:41.745231+00:00"
+    },
+    {
+      "id": 10,
+      "issue_number": 15,
+      "file": "ideas/0010-add-abusive-language-to-reports.md",
+      "username": "kampallysharmila9",
+      "title": "Add abusive language to reports",
+      "category": "User Experience",
+      "problem": "Add abusive language to reports",
+      "solution": "Add abusive language to reports",
+      "benefit": "Add abusive language to reports",
+      "keywords": [
+        "abusive",
+        "language",
+        "reports",
+        "experience"
+      ],
+      "submitted_at": "2026-10-14T17:35:36.041899+00:00"
     }
   ]
 }
