@@ -13,15 +13,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-
   process-idea:
-
     if: contains(github.event.issue.labels.*.name, 'idea')
-
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -40,31 +36,46 @@ jobs:
           echo "Python files:"
           find . -type f -name "*.py"
 
+      # NEW: Check the idea before processing it.
+      - name: Install guardrail dependencies
+        run: |
+          python3 -m pip install \
+            google-genai \
+            pydantic \
+            requests
+
+      - name: Check idea with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: gemini-2.5-flash
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
+        run: |
+          python3 scripts/moderate_issue.py
+
+      # Existing step: runs only if moderation passes.
       - name: Process idea
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
-
         run: |
           python3 scripts/process_idea.py
 
+      # Existing commit step: runs only if earlier steps pass.
       - name: Commit changes
         run: |
-
           git config user.name "github-actions[bot]"
-
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add ideas/
 
           if ! git diff --cached --quiet; then
             git commit -m "Add idea from issue #${{ github.event.issue.number }}"
             git push
-
           else
-
             echo "No changes to commit."
-
           fi
