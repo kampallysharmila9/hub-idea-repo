@@ -10,8 +10,7 @@ GitHub Actions then:
 
 1. Reads the submitted idea.
 2. Builds a semantic representation of the idea.
-3. Generates a Gemini embedding.
-4. Compares it with existing idea embeddings.
+3. Uses gemini model
 5. Calculates cosine similarity.
 6. Uses keyword/Jaccard similarity as a secondary signal.
 7. Flags likely duplicate ideas.
@@ -31,7 +30,7 @@ GitHub Actions
 Python
        |
        v
-Gemini Embedding API
+Gemini Model
        |
        v
 Cosine Similarity
