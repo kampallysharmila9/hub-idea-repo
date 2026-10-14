@@ -187,10 +187,23 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as exc:
-        # Fail closed: never continue processing when moderation
-        # cannot complete. Do not print API response bodies or keys.
         print(
             f"::error::Guardrail failed: {type(exc).__name__}",
             file=sys.stderr,
         )
+
+        # Print safe diagnostic details, without credentials.
+        status_code = getattr(exc, "status_code", None)
+        if status_code is not None:
+            print(f"HTTP status: {status_code}", file=sys.stderr)
+
+        message = str(exc)
+        if message:
+            # Avoid printing API keys or full request/response data.
+            message = message.replace(
+                os.getenv("GEMINI_API_KEY", ""),
+                "[REDACTED]",
+            )
+            print(f"Diagnostic: {message[:500]}", file=sys.stderr)
+
         sys.exit(1)
